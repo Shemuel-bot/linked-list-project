@@ -58,6 +58,50 @@ class NodeList {
     return current;
   }
 
+  pop() {
+    const current = this.head;
+    while (this.head) {
+      if (this.head.next.next === null) {
+        this.head.next = null;
+        break;
+      }
+      this.head = this.head.next;
+    }
+    this.head = current;
+    this.size -= 1;
+  }
+
+  contains(value){
+    const current = this.head;
+    while (this.head) {
+      if (this.head.data === value) {
+        this.head = current;
+        return true;
+      }
+      if(this.head.next === null){
+        this.head = current;
+        return false;
+      }
+      this.head = this.head.next;
+    }
+  }
+
+  find(value){
+    const current = this.head;
+    let index = 0;
+    while (this.head) {
+      if (this.head.data === value) {
+        this.head = current;
+        return index;
+      }
+      if(this.head.next === null){
+        this.head = current;
+        return null;
+      }
+      this.head = this.head.next;
+      index += 1;
+    }
+  }
 
   toString() {
     let current = this.head;
@@ -69,9 +113,3 @@ class NodeList {
     console.log(null);
   }
 }
-
-const ll = new NodeList();
-ll.prepend(100);
-ll.prepend(200);
-ll.append(300);
-ll.toString();
