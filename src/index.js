@@ -13,7 +13,17 @@ class NodeList {
   }
 
   append(data) {
+    const current = this.head;
     this.tail = new Node(data);
+    while (this.head) {
+      if (this.head.next === null) {
+        this.head.next = this.tail;
+        break;
+      }
+      this.head = this.head.next;
+    }
+    this.head = current;
+    this.size += 1;
   }
 
   prepend(data) {
@@ -40,13 +50,14 @@ class NodeList {
     }
   }
 
-  at(index){
-    let current = this.head
-    for (let i = 0; i < index; i+=1) {
-        current = current.next;
+  at(index) {
+    let current = this.head;
+    for (let i = 0; i < index; i += 1) {
+      current = current.next;
     }
     return current;
   }
+
 
   toString() {
     let current = this.head;
@@ -62,4 +73,5 @@ class NodeList {
 const ll = new NodeList();
 ll.prepend(100);
 ll.prepend(200);
-console.log(ll.at(1));
+ll.append(300);
+ll.toString();
